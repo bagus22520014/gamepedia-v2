@@ -1,0 +1,130 @@
+.navbar {
+    background: linear-gradient(to right, #1EA3EF, #0064EB);
+    display: flex;
+    align-items: center;
+    padding: 10px 24px;
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    width: auto;
+    height: 42px;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+    width: 504px;
+}
+
+.search-input {
+    height: 40px;
+    width: 100%;
+    border-radius: 100px 0 0 100px;
+    border: 1px solid #1EA3EF;
+    justify-content: center;
+    font-size: 18px;
+    color: #1EA3EF;
+    padding-left: 24px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    font-style: italic;
+    font-size: 18px;
+    color: #9DB2BF;
+}
+
+.search-button {
+    height: 40px;
+    width: 64px;
+    background-color: #1EA3EF;
+    border: none;
+    border-radius: 0 100px 100px 0;
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentcolor;
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 14px;
+}
+
+.navbar-tools {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.navbar-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-background {
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bell-icon,
+.settings-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.navbar-auth {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.signup-button {
+    width: 93px;
+    height: 40px;
+    background-color: #1EA3EF;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.login-button {
+    width: 64px;
+    height: 40px;
+    background-color: transparent;
+    color: #1EA3EF;
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    border: none;
+    font-size: 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

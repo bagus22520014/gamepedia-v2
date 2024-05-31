@@ -10,7 +10,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #00224D;
   color: #fff;
-    line-height: 1.5;
+  line-height: 1.5;
 }
 
 #root {
@@ -25,6 +25,10 @@ button {
 }
 
 a {
-text-decoration: none;
+  text-decoration: none;
 }
 
+input {
+  outline: none;
+  border: none;
+}

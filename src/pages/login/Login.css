@@ -1,0 +1,260 @@
+.login-page .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  background-color: #00224D;
+  overflow: hidden;
+}
+
+.login-page .vector-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  z-index: 0;
+}
+
+.login-page .vector-image {
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-page .login-card {
+  width: 1600px;
+  height: 800px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  border-radius: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  position: relative;
+}
+
+.login-page .close-icon {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.login-page .login-box {
+  width: 80%;
+  max-width: 500px;
+  flex: 1;
+}
+
+.login-page .login-form {
+  width: 800px;
+  height: 800px;
+  padding: 40px 55px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page .login-form h1 {
+  color: #00224D;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.login-page .login-prompt {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: right;
+  margin-right: 8px;
+  margin-bottom: 24px;
+}
+
+.login-page .signup-link {
+  color: #1EA3EF;
+  margin-left: 8px;
+}
+
+.login-page .input-group {
+  width: 100%;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.login-page .input-group input {
+  display: flex;
+  background: #FFF;
+  border-radius: 55px;
+  width: 100%;
+  padding: 16px 32px;
+  font-size: 24px;
+  color: #00a4ef;
+  font-weight: 300;
+}
+
+.login-page .input-group input::placeholder {
+  color: #9DB2BF;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.login-page .input-group input:focus {
+  font-size: 24px;
+  color: #000;
+  font-weight: 300;
+}
+
+.login-page .password-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.login-page .password-toggle-icon {
+  position: absolute;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.login-page .button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  width: 100%;
+}
+
+.login-page .login-button {
+  display: flex;
+  width: 325px;
+  border-radius: 55px;
+  background: linear-gradient(90deg, #1EA3EF 0%, #0064EB 100%);
+  color: #fff;
+  font-size: 20px;
+  margin-right: 0;
+}
+
+.login-page .forgot-password-button {
+  background: #fff;
+  width: 325px;
+  padding: 16px;
+  border-radius: 56px;
+  color: #1EA3EF;
+  font-size: 20px;
+}
+
+.login-page .divider {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+  width: 100%;
+}
+
+.login-page .divider span {
+  color: #00224D;
+  padding: 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.login-page .divider::before,
+.login-page .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 3px solid #00224D;
+}
+
+.login-page .divider::before {
+  margin-right: 10px;
+}
+
+.login-page .divider::after {
+  margin-left: 10px;
+}
+
+.login-page .social-login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.login-page .social-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.login-page .social-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.login-page .social-button span {
+  flex: 1;
+}
+
+.login-page .social-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.login-page .google-button,
+.login-page .facebook-button,
+.login-page .github-button,
+.login-page .microsoft-button {
+  display: flex;
+  color: #fff;
+  font-size: 24px;
+  text-align: left;
+  width: 330px;
+  padding: 8px 5px 8px 24px;
+  border-radius: 55px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-page .google-button {
+  background-color: #db4437;
+}
+
+.login-page .facebook-button {
+  background-color: #3b5998;
+}
+
+.login-page .microsoft-button {
+  background-color: #00a4ef;
+}
+
+.login-page .github-button {
+  background-color: #333;
+}
+
+.login-page .login-image {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 800px;
+  border-top-right-radius: 72px;
+  border-bottom-right-radius: 72px;
+}
+
+.login-page .vector1-image {
+  height: 800px;
+  width: auto;
+  border-top-right-radius: 72px;
+  border-bottom-right-radius: 72px;
+  border-top-left-radius: 256px;
+  border-bottom-left-radius: 256px;
+}

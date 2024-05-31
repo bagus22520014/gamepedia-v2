@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 import './Login.css';
 import vectorImage from '../../asset/img/vector/vector.png';
 import vector1Image from '../../asset/img/vector/vector-1.jpg';
@@ -13,15 +15,28 @@ import microsoftLogo from '../../asset/img/auth-logo/microsoft-logo.png';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleClose = () => {
-    navigate('/');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert(error.message);
+    }
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const handleClose = () => {
+    navigate('/');
   };
 
   return (
@@ -39,9 +54,14 @@ const Login = () => {
                 <span>Don't have an account?</span>
                 <Link to="/signup" className="signup-link">Sign up</Link>
               </div>
-              <form>
+              <form onSubmit={handleLogin}>
                 <div className="input-group">
-                  <input type="email" placeholder="Email" />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
                 <div className="input-group password-group">
                   <input
@@ -58,46 +78,47 @@ const Login = () => {
                       onClick={togglePasswordVisibility}
                     />
                   )}
+                  </div>
+                  <div className="button">
+                    <button type="button" className="forgot-password-button">Forgot Password?</button>
+                    <button type="submit" className="login-button">Log In</button>
+                  </div>
+                </form>
+                <div className="divider">
+                  <span>OR</span>
                 </div>
-                <div className="button">
-                  <button type="button" className="forgot-password-button">Forgot Password?</button>
-                  <button type="submit" className="login-button">Log In</button>
-                </div>
-              </form>
-              <div className="divider">
-                <span>OR</span>
-              </div>
-              <div className="social-login">
-                <div className="social-row">
-                  <button className="social-button google-button">
-                    <span>Google</span>
-                    <img src={googleLogo} alt="Google Logo" className="social-logo" />
-                  </button>
-                  <button className="social-button microsoft-button">
-                    <span>Microsoft</span>
-                    <img src={microsoftLogo} alt="Microsoft Logo" className="social-logo" />
-                  </button>
-                </div>
-                <div className="social-row">
+                <div className="social-login">
+                  <div className="social-row">
+                    <button className="social-button google-button">
+                      <span>Google</span>
+                      <img src={googleLogo} alt="Google Logo" className="social-logo" />
+                    </button>
+                    <button className="social-button microsoft-button">
+                      <span>Microsoft</span>
+                      <img src={microsoftLogo} alt="Microsoft Logo" className="social-logo" />
+                    </button>
+                  </div>
+                  <div className="social-row">
                   <button className="social-button facebook-button">
-                    <span>Facebook</span>
-                    <img src={facebookLogo} alt="Facebook Logo" className="social-logo" />
-                  </button>
-                  <button className="social-button github-button">
-                    <span>GitHub</span>
-                    <img src={githubLogo} alt="GitHub Logo" className="social-logo" />
-                  </button>
+                      <span>Facebook</span>
+                      <img src={facebookLogo} alt="Facebook Logo" className="social-logo" />
+                    </button>
+                    <button className="social-button github-button">
+                      <span>GitHub</span>
+                      <img src={githubLogo} alt="GitHub Logo" className="social-logo" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="login-image">
-            <img src={vector1Image} alt="Vector 1" className="vector1-image" />
+            <div className="login-image">
+              <img src={vector1Image} alt="Vector 1" className="vector1-image" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default Login;
+    );
+  };
+  
+  export default Login;
+  

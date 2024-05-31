@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 import './Signup.css';
 import vectorImage from '../../asset/img/vector/vector.png';
 import vector1Image from '../../asset/img/vector/vector-1.jpg';
@@ -9,13 +11,28 @@ import eyeSlashIcon from '../../asset/icon/eye-slash-icon.png';
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const handleClose = () => {
-    navigate('/');
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing up:', error);
+      alert(error.message);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -33,7 +50,7 @@ const Signup = () => {
           <img src={vectorImage} alt="Vector Background" className="vector-image" />
         </div>
         <div className="signup-card">
-          <img src={closeIcon} alt="Close Icon" className="close-icon" onClick={handleClose} />
+          <img src={closeIcon} alt="Close Icon" className="close-icon" onClick={() => navigate('/')} />
           <div className="signup-box">
             <div className="signup-form">
               <h1>Sign Up</h1>
@@ -41,16 +58,31 @@ const Signup = () => {
                 <span>Already have an account?</span>
                 <Link to="/login" className="login-link">Log In</Link>
               </div>
-              <form>
+              <form onSubmit={handleSignup}>
                 <div className="input-group">
-                  <input type="email" placeholder="Email" />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
                 <div className="name-group">
                   <div className="input-group">
-                    <input type="text" placeholder="First Name" />
+                    <input
+                      type="text"
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
                   </div>
                   <div className="input-group">
-                    <input type="text" placeholder="Last Name" />
+                    <input
+                      type="text"
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="input-group password-group">

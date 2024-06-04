@@ -1,68 +1,70 @@
 .profile-popup {
-    position: absolute;
-    top: 96px;
-    right: 0;
-    width: 400px;
-    height: 590px;
-    background: linear-gradient(to right, #1EA3EF, #0064EB);
-    border-radius: 16px;
-    z-index: 100;
+  position: absolute;
+  top: 96px;
+  right: 0;
+  width: 400px;
+  height: 590px;
+  background: linear-gradient(to right, #1EA3EF, #0064EB);
+  border-radius: 16px;
+  z-index: 1010
 }
 
 .profile-popup-content {
-    padding: 32px;
-    text-align: center;
-    position: relative;
+  padding: 32px;
+  text-align: center;
+  position: relative;
 }
 
 .close-button {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: transparent;
 }
 
 .close-icon-img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .profile-popup-content .profile-picture {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin-top: 8px;
-    margin-bottom: 16px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.profile-popup-content .profile-picture.online {
+  border: 6px solid #40A578;
 }
 
 .profile-popup-content h2 {
-    color: #fff;
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 56px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 56px;
 }
 
 .edit-profile-button,
 .logout-button {
-    height: 56px;
-    width: 330px;
-    padding: 12px;
-    border: none;
-    border-radius: 50px;
-    font-size: 24px;
-    font-weight: 400;
-    cursor: pointer;
+  height: 56px;
+  width: 330px;
+  padding: 12px;
+  border: none;
+  border-radius: 50px;
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 .edit-profile-button {
-    background: #fff;
-    color: #1EA3EF;
-    margin-bottom: 24px;
+  background: #fff;
+  color: #1EA3EF;
+  margin-bottom: 24px;
 }
 
 .logout-button {
-    background: #FF004D;
-    color: #fff;
+  background: #FF004D;
+  color: #fff;
 }

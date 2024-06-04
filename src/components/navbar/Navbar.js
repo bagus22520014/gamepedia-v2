@@ -8,6 +8,8 @@ import settingsIcon from '../../asset/icon/settings-icon.png';
 import closeIcon from '../../asset/icon/close-icon.png';
 import defaultProfilePic from '../../asset/img/profile-picture/default-pp.png';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 import ProfilePopup from '../pop-up/menu/profile/ProfilePopup';
 
 function Navbar() {
@@ -16,21 +18,42 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [online, setOnline] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
         setUser(user);
+        subscribeToUserData(user.uid);
       } else {
         setIsLoggedIn(false);
         setUser(null);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+    };
   }, []);
+
+  const subscribeToUserData = (uid) => {
+    const userDocRef = doc(db, "users", uid);
+    const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        console.log('User data updated: ', data);
+        setOnline(data.online);
+      } else {
+        console.log('No such document!');
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  };
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -107,7 +130,7 @@ function Navbar() {
             <img
               src={user?.photoURL || defaultProfilePic}
               alt="Profile"
-              className="profile-picture"
+              className={`profile-picture ${online ? 'online' : ''}`}
               onClick={togglePopup}
             />
             {showPopup && <ProfilePopup user={user} onClose={togglePopup} />}

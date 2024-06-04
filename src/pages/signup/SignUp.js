@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, db } from '../../firebaseConfig';
+import { setDoc, doc } from 'firebase/firestore';
 import './Signup.css';
 import vectorImage from '../../asset/img/vector/vector.png';
 import vector1Image from '../../asset/img/vector/vector-1.jpg';
@@ -27,7 +28,21 @@ const Signup = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: `${firstName} ${lastName}`,
+      });
+
+      await setDoc(doc(db, "users", user.uid), {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: "",
+        online: true
+      });
+
       navigate('/');
     } catch (error) {
       console.error('Error signing up:', error);

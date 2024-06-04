@@ -1,15 +1,18 @@
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyCGtQgGFQcwBXEy4GhFqhrMIxW1l3m2csQ",
+  authDomain: "gamepedia-2d934.firebaseapp.com",
+  projectId: "gamepedia-2d934",
+  storageBucket: "gamepedia-2d934.appspot.com",
+  messagingSenderId: "79814456311",
+  appId: "1:79814456311:web:3f19005667f4acb0fc34f2",
+  measurementId: "G-F6HJGVLGKH"
 };
 
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 export const auth = getAuth(app);
 export default app;

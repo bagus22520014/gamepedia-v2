@@ -161,10 +161,14 @@
   position: relative;
 }
 
-.navbar .profile-picture {
+.profile-container .profile-picture {
   background-color: #fff;
   width: 56px;
   height: 56px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.profile-container .profile-picture.online {
+  border: 4px solid #40A578;
 }

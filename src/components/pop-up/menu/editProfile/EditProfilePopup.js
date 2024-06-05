@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { db } from '../../../../firebaseConfig';
+import { AlertContext } from '../../../pop-up/menu/alert/notif/AlertManager';
+import AlertConfirmation from '../../../pop-up/menu/alert/confirm/AlertConfirmation';
 import './EditProfilePopup.css';
-import closeIcon from '../../../../asset/icon/close-icon.png';
+import closeIcon from '../../../../asset/icon/close-icon-white.png';
 
 const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
   const [firstName, setFirstName] = useState('');
@@ -11,6 +13,8 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [online, setOnline] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const { addAlert } = useContext(AlertContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -36,9 +40,10 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
       });
       onUpdateUserInfo({ firstName, lastName, online });
       setIsEditing(false);
+      addAlert('success', 'Profile updated successfully.');
     } catch (error) {
       console.error("Error updating profile: ", error);
-      alert("Error updating profile");
+      addAlert('error', 'Error updating profile.');
     }
   };
 
@@ -47,20 +52,14 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
     const currentUser = auth.currentUser;
 
     try {
-      // Menghapus dokumen pengguna dari Firestore
       await deleteDoc(doc(db, "users", user.uid));
-
-      // Menghapus akun pengguna dari Firebase Authentication
       await deleteUser(currentUser);
-
-      // Logout pengguna
       await signOut(auth);
-
-      // Menutup popup
       onClose();
+      addAlert('success', 'Account deleted successfully.');
     } catch (error) {
       console.error("Error deleting account: ", error);
-      alert("Error deleting account. Please make sure you are logged in and try again.");
+      addAlert('error', 'Error deleting account. Please make sure you are logged in and try again.');
     }
   };
 
@@ -81,6 +80,10 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
 
   const handleToggleOnline = () => {
     setOnline(!online);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowConfirmation(true);
   };
 
   return (
@@ -142,9 +145,17 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
           <button className="edit-button" onClick={handleEdit}>
             {isEditing ? "Save" : "Edit"}
           </button>
-          <button className="delete-button" onClick={handleDelete}>Delete</button>
+          <button className="delete-button" onClick={handleConfirmDelete}>Delete</button>
         </div>
       </div>
+      {showConfirmation && (
+        <AlertConfirmation
+          title="Confirm Deletion"
+          message="Are you sure you want to delete your account? This action cannot be undone."
+          onConfirm={handleDelete}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 };

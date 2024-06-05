@@ -6,7 +6,7 @@
   height: 590px;
   background: linear-gradient(to right, #1EA3EF, #0064EB);
   border-radius: 16px;
-  z-index: 1010
+  z-index: 100;
 }
 
 .profile-popup-content {
@@ -22,7 +22,7 @@
   background-color: transparent;
 }
 
-.close-icon-img {
+.close-icon-img-ProfilePopup {
   width: 32px;
   height: 32px;
 }

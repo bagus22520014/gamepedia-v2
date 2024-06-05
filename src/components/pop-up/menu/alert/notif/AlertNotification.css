@@ -1,0 +1,73 @@
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.alert-notification {
+  position: fixed;
+  right: 20px;
+  width: 350px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  overflow: hidden;
+  color: black;
+  animation: slideInFromRight 0.5s forwards;
+  z-index: 1000;
+}
+
+.alert-notification.hidden {
+  animation: slideOutToRight 0.5s forwards;
+}
+
+.alert-notification.success .alert-header {
+  background-color: #34a353;
+}
+
+.alert-notification.warning .alert-header {
+  background-color: #ffc100;
+}
+
+.alert-notification.error .alert-header {
+  background-color: #ff004d;
+}
+
+.alert-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+}
+
+.alert-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.alert-title {
+  font-size: 24px;
+}
+
+.alert-message {
+  padding: 10px 20px;
+  font-size: 20px;
+}

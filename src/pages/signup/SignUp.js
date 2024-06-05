@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db } from '../../firebaseConfig';
@@ -6,9 +6,10 @@ import { setDoc, doc } from 'firebase/firestore';
 import './Signup.css';
 import vectorImage from '../../asset/img/vector/vector.png';
 import vector1Image from '../../asset/img/vector/vector-1.jpg';
-import closeIcon from '../../asset/icon/close-icon.png';
+import closeIcon from '../../asset/icon/close-icon-white.png';
 import eyeIcon from '../../asset/icon/eye-icon.png';
 import eyeSlashIcon from '../../asset/icon/eye-slash-icon.png';
+import { AlertContext } from '../../components/pop-up/menu/alert/notif/AlertManager';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -19,11 +20,12 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const { addAlert } = useContext(AlertContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      addAlert('error', 'Passwords do not match');
       return;
     }
 
@@ -43,10 +45,15 @@ const Signup = () => {
         online: true
       });
 
+      addAlert('success', 'Signup successful!');
       navigate('/');
     } catch (error) {
       console.error('Error signing up:', error);
-      alert(error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        addAlert('error', 'Email is already in use');
+      } else {
+        addAlert('error', 'Signup failed. Please try again');
+      }
     }
   };
 

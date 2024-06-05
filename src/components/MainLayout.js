@@ -1,11 +1,12 @@
 import React from 'react';
-import Navbar from './navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-
-const MainLayout = () => {
+import Navbar from './navbar/Navbar';
+import AlertManager from '../components/pop-up/menu/alert/notif/AlertManager'; 
+function MainLayout() {
   return (
     <div>
       <Navbar />
+      <AlertManager /> 
       <Outlet />
     </div>
   );

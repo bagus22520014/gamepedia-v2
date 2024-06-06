@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import './AlertNotification.css';
 import successIcon from '../../../../../asset/icon/success-icon.png';
 import warningIcon from '../../../../../asset/icon/warning-icon.png';
 import errorIcon from '../../../../../asset/icon/error-icon.png';
 
-const AlertNotification = ({ id, type, message, removeAlert, style }) => {
+const AlertNotification = forwardRef(({ id, type, message, removeAlert, style }, ref) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(() => removeAlert(id), 500); 
+      setTimeout(() => removeAlert(id), 500);
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -37,6 +37,7 @@ const AlertNotification = ({ id, type, message, removeAlert, style }) => {
 
   return (
     <div
+      ref={ref}
       className={`alert-notification ${type} ${isVisible ? 'visible' : 'hidden'}`}
       style={style}
     >
@@ -47,6 +48,6 @@ const AlertNotification = ({ id, type, message, removeAlert, style }) => {
       <div className="alert-message">{message}</div>
     </div>
   );
-};
+});
 
 export default AlertNotification;

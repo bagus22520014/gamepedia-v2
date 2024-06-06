@@ -40,7 +40,7 @@ const EditProfilePopup = ({ user, onClose, onUpdateUserInfo }) => {
       });
       onUpdateUserInfo({ firstName, lastName, online });
       setIsEditing(false);
-      addAlert('success', 'Profile updated successfully.');
+      addAlert('success', 'Profile updated successfully.'); 
     } catch (error) {
       console.error("Error updating profile: ", error);
       addAlert('error', 'Error updating profile.');

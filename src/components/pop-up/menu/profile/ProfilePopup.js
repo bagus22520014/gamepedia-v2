@@ -66,7 +66,6 @@ const ProfilePopup = ({ user, onClose }) => {
       displayName: `${updatedUserInfo.firstName} ${updatedUserInfo.lastName}`,
     });
     setOnline(updatedUserInfo.online);
-    addAlert('success', 'Profile updated successfully');
   };
 
   const showLogoutConfirmationDialog = () => {

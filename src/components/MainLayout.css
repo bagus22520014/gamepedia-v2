@@ -1,0 +1,18 @@
+/* Navbar CSS */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #004080; 
+    z-index: 1000; 
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Konten CSS */
+  .content {
+    padding: 20px; /* Sesuaikan dengan padding yang diinginkan */
+    overflow-y: auto; /* Tambahkan scrollbar vertikal jika diperlukan */
+  }
+  

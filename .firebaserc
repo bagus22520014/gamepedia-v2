@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "gamepedia-2d934",
+    "firebase storage:rules:set cors.json": "gamepedia-2d934"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

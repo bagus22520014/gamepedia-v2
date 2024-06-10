@@ -1,0 +1,54 @@
+.sort-dropdown {
+    display: inline-block;
+  }
+  
+  .sort-button {
+    background: #fff;
+    color: #1EA3EF;
+    font-size: 23px;
+    padding: 16px 24px;
+    width: 200px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  
+  }
+  
+  .sort-icon {
+    width: 28px;
+    height: 28px;
+  
+  }
+  
+  .sort-options {
+    position: absolute;
+    background: #fff;
+    border-radius: 10px;  
+    width: 200px;
+    z-index: 1;
+  }
+  
+  .sort-options li {
+    background: none;
+    color: #fff;
+    font-size: 20px;
+    color: #1EA3EF;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    list-style-type: none;
+  
+  }
+  
+  .sort-options li:hover {
+    background: #0064EB;
+    color: #fff;
+    border-radius: 10px;
+  }
+  

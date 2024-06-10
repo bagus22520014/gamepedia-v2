@@ -8,9 +8,11 @@ import { db } from '../../../../firebaseConfig';
 import EditProfilePopup from '../editProfile/EditProfilePopup';
 import AlertConfirmation from '../alert/confirm/AlertConfirmation';
 import { AlertContext } from '../alert/notif/AlertManager';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePopup = ({ user, onClose }) => {
   const [online, setOnline] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -20,6 +22,7 @@ const ProfilePopup = ({ user, onClose }) => {
   });
 
   const { addAlert } = useContext(AlertContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -27,6 +30,7 @@ const ProfilePopup = ({ user, onClose }) => {
       if (userDoc.exists()) {
         const data = userDoc.data();
         setOnline(data.online);
+        setIsAdmin(data.isAdmin || false);
         setUserInfo({
           firstName: data.firstName,
           lastName: data.lastName,
@@ -52,7 +56,11 @@ const ProfilePopup = ({ user, onClose }) => {
   };
 
   const handleEditProfile = () => {
-    setShowEditProfile(true);
+    if (isAdmin) {
+      navigate('/games');
+    } else {
+      setShowEditProfile(true);
+    }
   };
 
   const closeEditProfile = () => {
@@ -108,10 +116,18 @@ const ProfilePopup = ({ user, onClose }) => {
           className={`profile-picture ${online ? 'online' : ''}`}
         />
         <h2>{userInfo.displayName}</h2>
-        <button className="edit-profile-button" onClick={handleEditProfile}>Edit Profile</button>
+        <button className="edit-profile-button" onClick={handleEditProfile}>
+          {isAdmin ? 'Add Game' : 'Edit Profile'}
+        </button>
         <button className="logout-button" onClick={showLogoutConfirmationDialog}>Log Out</button>
       </div>
-      {showEditProfile && <EditProfilePopup user={user} onClose={closeEditProfile} onUpdateUserInfo={handleUserInfoUpdate} />}
+      {showEditProfile && (
+        <EditProfilePopup
+          user={user}
+          onClose={closeEditProfile}
+          onUpdateUserInfo={handleUserInfoUpdate}
+        />
+      )}
       {showLogoutConfirmation && (
         <AlertConfirmation
           title="Confirm Logout"

@@ -1,0 +1,39 @@
+.game-database-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 40px 0 40px;
+}
+
+.game-database h1 {
+  color: #fff;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.add-game-button {
+  background: linear-gradient(90deg, #1EA3EF 0%, #0064EB 100%);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  display: flex;
+  padding: 16px 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 32px;
+  justify-items: center;
+}

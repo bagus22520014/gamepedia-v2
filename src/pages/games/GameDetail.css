@@ -1,0 +1,107 @@
+.game-detail {
+    display: flex;
+    flex-direction: column;
+
+    color: #fff;
+}
+
+.game-detail-header {
+    display: flex;
+    align-items: center;
+    margin: 32px 40px 0 40px;
+}
+
+.back-icon {
+    cursor: pointer;
+    margin-right: 32px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+}
+
+.game-detail-title {
+    flex-grow: 1;
+    color: #fff;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.game-detail-header .edit-button {
+    background: linear-gradient(90deg, #1EA3EF 0%, #0064EB 100%);
+    color: #fff;
+    width: 210px;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    padding: 16px 48px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.game-detail-content {
+    display: flex;
+    margin: 32px;
+}
+
+.game-detail-left {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.game-detail-trailer {
+    width: 1300px;
+    height: 731.25px;
+    border-radius: 32px;
+    margin-bottom: 20px;
+}
+
+.game-detail-screenshots {
+    display: flex;
+    gap: 10px;
+}
+
+.screenshot {
+    width: 100px;
+    height: 75px;
+    border-radius: 5px;
+}
+
+.game-detail-right {
+    flex: 1;
+}
+
+.game-detail-section {
+    background:#fff;
+    border-radius: 0 0 32px 32px;
+    margin-bottom: 20px;
+    padding: 24px;
+}
+
+.game-info {
+    background: linear-gradient(90deg, #1EA3EF 0%, #0064EB 100%);
+    border-radius: 32px 32px 0 0;
+    padding: 12px 24px;
+}
+
+.game-detail-section p {
+    color: #000;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #1EA3EF;
+    border-radius: 50px;
+  }

@@ -92,16 +92,3 @@
     font-size: 20px;
     margin-bottom: 8px;
 }
-
-::-webkit-scrollbar {
-    width: 15px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: transparent;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #1EA3EF;
-    border-radius: 50px;
-  }

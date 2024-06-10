@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import './AddGamePopup.css';
 import closeIcon from '../../../../asset/icon/close-icon-white.png';
 import { db, storage } from '../../../../firebaseConfig';
@@ -13,7 +13,7 @@ const genres = [
 ];
 
 const platforms = [
-  "Windows", "PlayStation 4", "PlayStation 5","Xbox One" , "Xbox Series S/X", 
+  "PC", "PlayStation 4", "PlayStation 5","Xbox One" , "Xbox Series S/X", 
   "Nintendo Switch", "Android", "iOS"
 ];
 
@@ -38,6 +38,24 @@ const AddGamePopup = ({ onClose, onAddGame }) => {
   const [dropdowns, setDropdowns] = useState({ genre: false, platform: false });
 
   const { addAlert } = useContext(AlertContext);
+  const genreRef = useRef(null);
+  const platformRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (genreRef.current && !genreRef.current.contains(event.target)) {
+        setDropdowns((prevDropdowns) => ({ ...prevDropdowns, genre: false }));
+      }
+      if (platformRef.current && !platformRef.current.contains(event.target)) {
+        setDropdowns((prevDropdowns) => ({ ...prevDropdowns, platform: false }));
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -151,7 +169,7 @@ const AddGamePopup = ({ onClose, onAddGame }) => {
             onChange={handleChange}
             required
           />
-          <div className="dropdown-container">
+          <div className="dropdown-container" ref={genreRef}>
             <div className="dropdown-label" onClick={() => toggleDropdown('genre')}>
               {gameData.genre.length > 0 ? gameData.genre.join(', ') : 'Genre'}
             </div>
@@ -171,7 +189,7 @@ const AddGamePopup = ({ onClose, onAddGame }) => {
               </div>
             )}
           </div>
-          <div className="dropdown-container">
+          <div className="dropdown-container" ref={platformRef}>
             <div className="dropdown-label" onClick={() => toggleDropdown('platform')}>
               {gameData.platform.length > 0 ? gameData.platform.join(', ') : 'Platform'}
             </div>

@@ -50,6 +50,10 @@
   background-color: #ff004d;
 }
 
+.alert-notification.info .alert-header {
+  background-color: #1ea3ef;
+}
+
 .alert-header {
   display: flex;
   align-items: center;

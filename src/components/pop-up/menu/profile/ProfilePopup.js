@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './ProfilePopup.css';
-import defaultProfilePic from '../../../../asset/img/profile-picture/default-pp.png';
-import closeIcon from '../../../../asset/icon/close-icon-white.png';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../../firebaseConfig';
 import EditProfilePopup from '../editProfile/EditProfilePopup';
 import AlertConfirmation from '../alert/confirm/AlertConfirmation';
 import { AlertContext } from '../alert/notif/AlertManager';
-import { useNavigate } from 'react-router-dom';
+import './ProfilePopup.css';
+import defaultProfilePic from '../../../../asset/img/profile-picture/default-pp.png';
+import closeIcon from '../../../../asset/icon/close-icon-white.png';
 
 const ProfilePopup = ({ user, onClose }) => {
   const [online, setOnline] = useState(false);
@@ -48,7 +48,8 @@ const ProfilePopup = ({ user, onClose }) => {
       await updateDoc(doc(db, "users", user.uid), { online: false });
       await signOut(auth);
       addAlert('success', 'Successfully logged out');
-      onClose();
+      navigate('/'); 
+      onClose();  
     } catch (error) {
       console.error("Logout failed: ", error);
       addAlert('error', `Logout failed: ${getErrorMessage(error)}`);
@@ -57,6 +58,7 @@ const ProfilePopup = ({ user, onClose }) => {
 
   const handleEditProfile = () => {
     if (isAdmin) {
+      onClose(); 
       navigate('/games');
     } else {
       setShowEditProfile(true);

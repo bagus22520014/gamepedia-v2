@@ -3,6 +3,7 @@ import './AlertNotification.css';
 import successIcon from '../../../../../asset/icon/success-icon.png';
 import warningIcon from '../../../../../asset/icon/warning-icon.png';
 import errorIcon from '../../../../../asset/icon/error-icon.png';
+import infoIcon from '../../../../../asset/icon/info-icon.png';
 
 const AlertNotification = forwardRef(({ id, type, message, removeAlert, style }, ref) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -18,6 +19,7 @@ const AlertNotification = forwardRef(({ id, type, message, removeAlert, style },
 
   let icon;
   let title;
+
   switch (type) {
     case 'success':
       icon = successIcon;
@@ -31,7 +33,13 @@ const AlertNotification = forwardRef(({ id, type, message, removeAlert, style },
       icon = errorIcon;
       title = 'Error';
       break;
+    case 'info':
+      icon = infoIcon;
+      title = 'Info';
+      break;
     default:
+      icon = null;
+      title = '';
       break;
   }
 
@@ -42,7 +50,7 @@ const AlertNotification = forwardRef(({ id, type, message, removeAlert, style },
       style={style}
     >
       <div className="alert-header">
-        <img src={icon} alt={`${type} icon`} className="alert-icon" />
+        {icon && <img src={icon} alt={`${type} icon`} className="alert-icon" />}
         <span className="alert-title">{title}</span>
       </div>
       <div className="alert-message">{message}</div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../asset/img/logo/gp logo 3.png';
@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import ProfilePopup from '../pop-up/menu/profile/ProfilePopup';
+import { AlertContext } from '../../components/pop-up/menu/alert/notif/AlertManager';
 
 function Navbar() {
   const [searchInputActive, setSearchInputActive] = useState(false);
@@ -19,6 +20,8 @@ function Navbar() {
   const [user, setUser] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [online, setOnline] = useState(false);
+  const { addAlert } = useContext(AlertContext);
+  const alertTriggered = useRef(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -43,10 +46,7 @@ function Navbar() {
     const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
-        console.log('User data updated: ', data);
         setOnline(data.online);
-      } else {
-        console.log('No such document!');
       }
     });
 
@@ -65,6 +65,9 @@ function Navbar() {
         } else {
           document.getElementById('searchInput').value += '/';
         }
+      } else if (!searchInputActive && !alertTriggered.current) {
+        addAlert('info', 'Press [/] to jump to the search box');
+        alertTriggered.current = true;
       }
     };
 
@@ -73,7 +76,7 @@ function Navbar() {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [searchInputActive]);
+  }, [searchInputActive, addAlert]);
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);

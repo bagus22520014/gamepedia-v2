@@ -10,10 +10,7 @@ const AlertManager = ({ children }) => {
 
   const addAlert = (type, message) => {
     const id = new Date().getTime();
-    setAlerts(prevAlerts => [
-      { id, type, message },
-      ...prevAlerts
-    ]);
+    setAlerts(prevAlerts => [{ id, type, message }, ...prevAlerts]);
   };
 
   const removeAlert = (id) => {
@@ -36,7 +33,7 @@ const AlertManager = ({ children }) => {
   return (
     <AlertContext.Provider value={{ addAlert }}>
       <div className="alert-manager">
-        {alerts.map((alert, index) => (
+        {alerts.map(alert => (
           <AlertNotification
             key={alert.id}
             id={alert.id}

@@ -10,6 +10,7 @@ import closeIcon from '../../asset/icon/close-icon-white.png';
 import eyeIcon from '../../asset/icon/eye-icon.png';
 import eyeSlashIcon from '../../asset/icon/eye-slash-icon.png';
 import { AlertContext } from '../../components/pop-up/menu/alert/notif/AlertManager';
+import { PreviousRouteContext } from '../../App';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -21,9 +22,11 @@ const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const { addAlert } = useContext(AlertContext);
+  const previousRoute = useContext(PreviousRouteContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       addAlert('error', 'Passwords do not match');
       return;
@@ -38,11 +41,11 @@ const Signup = () => {
       });
 
       await setDoc(doc(db, "users", user.uid), {
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
+        email,
+        firstName,
+        lastName,
         phoneNumber: "",
-        online: true
+        online: true,
       });
 
       addAlert('success', 'Signup successful!');
@@ -65,6 +68,14 @@ const Signup = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
+  const handleClose = () => {
+    if (previousRoute && previousRoute !== '/signup' && previousRoute !== '/login') {
+      navigate(previousRoute);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <div className="signup-page">
       <div className="signup-container">
@@ -72,7 +83,7 @@ const Signup = () => {
           <img src={vectorImage} alt="Vector Background" className="vector-image" />
         </div>
         <div className="signup-card">
-          <img src={closeIcon} alt="Close Icon" className="close-icon" onClick={() => navigate('/')} />
+          <img src={closeIcon} alt="Close Icon" className="close-icon" onClick={handleClose} />
           <div className="signup-box">
             <div className="signup-form">
               <h1>Sign Up</h1>

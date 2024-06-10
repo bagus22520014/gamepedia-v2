@@ -13,6 +13,7 @@ import githubLogo from '../../asset/img/auth-logo/github-logo.png';
 import googleLogo from '../../asset/img/auth-logo/google-logo.png';
 import microsoftLogo from '../../asset/img/auth-logo/microsoft-logo.png';
 import { AlertContext } from '../../components/pop-up/menu/alert/notif/AlertManager';
+import { PreviousRouteContext } from '../../App';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const { addAlert } = useContext(AlertContext);
+  const previousRoute = useContext(PreviousRouteContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -39,7 +41,11 @@ const Login = () => {
   };
 
   const handleClose = () => {
-    navigate('/');
+    if (previousRoute && previousRoute !== '/signup' && previousRoute !== '/login') {
+      navigate(previousRoute);
+    } else {
+      navigate('/');
+    }
   };
 
   return (

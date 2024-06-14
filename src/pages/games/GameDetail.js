@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import './GameDetail.css';
 import backIcon from '../../asset/icon/back-icon.png';
 import closeIcon from '../../asset/icon/close-icon-white.png';
+import { getAuth } from 'firebase/auth';
 
 const platforms = [
   { name: "Steam", logo: require('../../asset/logo/Steam-Logo.png') },
@@ -41,11 +42,28 @@ const GameDetail = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
   const storage = getStorage();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const genreRef = useRef(null);
   const platformRef = useRef(null);
 
   useEffect(() => {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const fetchUserData = async () => {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          setIsAdmin(data.isAdmin || false);
+        }
+      };
+
+      fetchUserData();
+    }
+
     const fetchGame = async () => {
       try {
         const docRef = doc(db, 'games', id);
@@ -262,10 +280,10 @@ const GameDetail = () => {
             ) : (
               <h1 className="game-detail-title">{game.title}</h1>
             )}
-            <button className="edit-button" onClick={handleEditToggle}>
+            {isAdmin && <button className="edit-button" onClick={handleEditToggle}>
               {isEditing ? 'Save' : 'Edit'}
-            </button>
-            <button className="delete-button" onClick={handleConfirmDelete}>Delete</button>
+            </button>}
+            {isAdmin && <button className="delete-button" onClick={handleConfirmDelete}>Delete</button>}
 
           </div>
           <div className="game-detail-content">

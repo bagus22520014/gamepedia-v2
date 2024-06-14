@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, query, doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import AddGamePopup from '../../components/pop-up/menu/addGame/AddGamePopup';
 import CardGame from '../../components/GameCard/GameCard';
 import SortDropdown from '../../components/SortDropdown/SortDropdown';
 import './GameDatabase.css';
+import { getAuth } from 'firebase/auth';
 
 const GameDatabase = () => {
   const [games, setGames] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [sortCriteria, setSortCriteria] = useState('date-newest'); 
+  const [sortCriteria, setSortCriteria] = useState('date-newest');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const fetchUserData = async () => {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          setIsAdmin(data.isAdmin || false);
+        }
+      };
+
+      fetchUserData();
+    }
+
     const q = query(collection(db, 'games'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const gamesData = [];
@@ -69,7 +86,7 @@ const GameDatabase = () => {
           <h1>List Game</h1>
           <div className="controls">
             <SortDropdown onSortChange={handleSortChange} />
-            <button className="add-game-button" onClick={handleOpenPopup}>Add Game</button>
+            {isAdmin && <button className="add-game-button" onClick={handleOpenPopup}>Add Game</button>}
           </div>
         </div>
         <div className="game-list">

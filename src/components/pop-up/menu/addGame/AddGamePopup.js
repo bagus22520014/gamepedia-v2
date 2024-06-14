@@ -13,7 +13,7 @@ const genres = [
 ];
 
 const platforms = [
-  "PC", "PlayStation 4", "PlayStation 5","Xbox One" , "Xbox Series S/X", 
+  "Steam", "Epic Games", "PlayStation 4", "PlayStation 5", "Xbox One", "Xbox Series S/X", 
   "Nintendo Switch", "Android", "iOS"
 ];
 

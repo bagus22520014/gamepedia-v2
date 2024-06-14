@@ -49,6 +49,7 @@ input {
 
 ::-webkit-scrollbar {
   width: 15px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {

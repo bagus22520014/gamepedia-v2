@@ -98,7 +98,6 @@
 
 .custom-file-upload {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -203,6 +202,11 @@
   font-size: 18px;
   color: #000;
   padding: 8px 0;
+  cursor: pointer;
+}
+
+.dropdown-content label:hover {
+  background: #f0f0f0;
 }
 
 .dropdown-content input[type="checkbox"] {

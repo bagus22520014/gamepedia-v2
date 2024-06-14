@@ -8,7 +8,7 @@ import settingsIcon from '../../asset/icon/settings-icon.png';
 import closeIcon from '../../asset/icon/close-icon.png';
 import defaultProfilePic from '../../asset/img/profile-picture/default-pp.png';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import ProfilePopup from '../pop-up/menu/profile/ProfilePopup';
 import { AlertContext } from '../../components/pop-up/menu/alert/notif/AlertManager';

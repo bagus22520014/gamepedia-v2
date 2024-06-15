@@ -1,0 +1,129 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+.image-gallery {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.image-item {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.image-item.active {
+  display: flex;
+  opacity: 1;
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-info {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.20);
+  bottom: 70px;
+  left: 40px;
+  color: white;
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  gap: 16px;
+}
+
+.image-info h2 {
+  color: #FFF;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.image-info p {
+  color: #FFF;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.genre-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.genre-box {
+  background: linear-gradient(90deg, #1EA3EF 0%, #0064EB 100%);
+  color: #FFF;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  padding: 10px;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.nav-arrow img {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover img {
+  transform: translateX(10px);
+}
+
+.nav-arrow.left-arrow:hover img {
+  transform: translateX(-10px);
+}

@@ -1,7 +1,7 @@
 .profile-popup {
   position: absolute;
   top: 96px;
-  right: 0;
+  right: 24px;
   width: 400px;
   height: 590px;
   background: linear-gradient(to right, #1EA3EF, #0064EB);

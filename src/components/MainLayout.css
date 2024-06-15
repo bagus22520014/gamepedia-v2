@@ -1,4 +1,3 @@
-/* Navbar CSS */
 .navbar {
     position: fixed;
     top: 0;
@@ -10,9 +9,8 @@
     align-items: center;
   }
   
-  /* Konten CSS */
   .content {
-    padding: 20px; /* Sesuaikan dengan padding yang diinginkan */
-    overflow-y: auto; /* Tambahkan scrollbar vertikal jika diperlukan */
+    padding: 20px; 
+    overflow-y: auto; 
   }
   

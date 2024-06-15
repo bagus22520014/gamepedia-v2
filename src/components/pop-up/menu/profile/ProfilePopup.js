@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import Portal from '../../../Portal';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -48,8 +49,8 @@ const ProfilePopup = ({ user, onClose }) => {
       await updateDoc(doc(db, "users", user.uid), { online: false });
       await signOut(auth);
       addAlert('success', 'Successfully logged out');
-      navigate('/'); 
-      onClose();  
+      navigate('/');
+      onClose();
     } catch (error) {
       console.error("Logout failed: ", error);
       addAlert('error', `Logout failed: ${getErrorMessage(error)}`);
@@ -58,7 +59,7 @@ const ProfilePopup = ({ user, onClose }) => {
 
   const handleEditProfile = () => {
     if (isAdmin) {
-      onClose(); 
+      onClose();
       navigate('/games');
     } else {
       setShowEditProfile(true);
@@ -107,38 +108,40 @@ const ProfilePopup = ({ user, onClose }) => {
   };
 
   return (
-    <div className="profile-popup">
-      <div className="profile-popup-content">
-        <button className="close-button" onClick={onClose}>
-          <img src={closeIcon} alt="Close Icon" className="close-icon-img" />
-        </button>
-        <img
-          src={user?.photoURL || defaultProfilePic}
-          alt="Profile"
-          className={`profile-picture ${online ? 'online' : ''}`}
-        />
-        <h2>{userInfo.displayName}</h2>
-        <button className="edit-profile-button" onClick={handleEditProfile}>
-          {isAdmin ? 'Add Game' : 'Edit Profile'}
-        </button>
-        <button className="logout-button" onClick={showLogoutConfirmationDialog}>Log Out</button>
+    <Portal>
+      <div className="profile-popup">
+        <div className="profile-popup-content">
+          <button className="close-button" onClick={onClose}>
+            <img src={closeIcon} alt="Close Icon" className="close-icon-img" />
+          </button>
+          <img
+            src={user?.photoURL || defaultProfilePic}
+            alt="Profile"
+            className={`profile-picture ${online ? 'online' : ''}`}
+          />
+          <h2>{userInfo.displayName}</h2>
+          <button className="edit-profile-button" onClick={handleEditProfile}>
+            {isAdmin ? 'Add Game' : 'Edit Profile'}
+          </button>
+          <button className="logout-button" onClick={showLogoutConfirmationDialog}>Log Out</button>
+        </div>
+        {showEditProfile && (
+          <EditProfilePopup
+            user={user}
+            onClose={closeEditProfile}
+            onUpdateUserInfo={handleUserInfoUpdate}
+          />
+        )}
+        {showLogoutConfirmation && (
+          <AlertConfirmation
+            title="Confirm Logout"
+            message="Are you sure you want to log out?"
+            onConfirm={confirmLogout}
+            onCancel={hideLogoutConfirmationDialog}
+          />
+        )}
       </div>
-      {showEditProfile && (
-        <EditProfilePopup
-          user={user}
-          onClose={closeEditProfile}
-          onUpdateUserInfo={handleUserInfoUpdate}
-        />
-      )}
-      {showLogoutConfirmation && (
-        <AlertConfirmation
-          title="Confirm Logout"
-          message="Are you sure you want to log out?"
-          onConfirm={confirmLogout}
-          onCancel={hideLogoutConfirmationDialog}
-        />
-      )}
-    </div>
+    </Portal>
   );
 };
 

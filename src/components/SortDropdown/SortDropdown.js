@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import sortIcon from '../../asset/icon/sort-icon.png';
 import './SortDropdown.css';
 
@@ -20,18 +20,18 @@ const SortDropdown = ({ onSortChange }) => {
     setShowOptions(false);
   };
 
-  const handleDocumentClick = (event) => {
+  const handleDocumentClick = useCallback((event) => {
     if (showOptions && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowOptions(false);
     }
-  };
+  }, [showOptions]);
 
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
-  }, [showOptions]);
+  }, [handleDocumentClick]);
 
   return (
     <div className="sort-dropdown" ref={dropdownRef}>

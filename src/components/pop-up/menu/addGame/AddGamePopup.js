@@ -7,7 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { AlertContext } from '../alert/notif/AlertManager';
 
 const genres = [
-  "Action", "Adventure", "Casual", "Fighting", "FPS", "MMORPG", "Open-world", 
+  "Action", "Adventure", "Casual", "Fighting", "FPS", "RPG", "Open-world", 
   "Puzzle", "Racing", "RPG", "Roguelike", "Simulation", "Sports", "Stealth",
   "Strategy", "Survival horror", "TPS", "Visual novel"
 ];

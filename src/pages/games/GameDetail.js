@@ -24,7 +24,7 @@ const platforms = [
 ];
 
 const genres = [
-  "Action", "Adventure", "Casual", "Fighting", "FPS", "MMORPG", "Open-world",
+  "Action", "Adventure", "Casual", "Fighting", "FPS", "RPG", "Open-world",
   "Puzzle", "Racing", "RPG", "Roguelike", "Simulation", "Sports", "Stealth",
   "Strategy", "Survival horror", "TPS", "Visual novel"
 ];

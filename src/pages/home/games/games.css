@@ -1,0 +1,19 @@
+.new-games-container,
+.playstation-games-container,
+.xbox-games-container,
+.nintendo-games-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px 40px 0 40px;
+}
+
+.new-games-container h1,
+.playstation-games-container h1,
+.xbox-games-container h1,
+.nintendo-games-container h1 {
+    color: #fff;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+}

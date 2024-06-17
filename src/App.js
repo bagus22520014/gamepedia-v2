@@ -7,6 +7,10 @@ import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import AlertManager from './components/pop-up/menu/alert/notif/AlertManager';
 import GameDetail from './pages/games/GameDetail';  
+import NewGames from './pages/home/games/NewGames'; 
+import PlayStationGames from './pages/home/games/PlayStationGames'; 
+import XboxGames from './pages/home/games/XboxGames'; 
+import NintendoGames from './pages/home/games/NintendoGames';
 
 export const PreviousRouteContext = createContext('');
 
@@ -38,6 +42,10 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/games" element={<GameDatabase />} />
               <Route path="/games/:id" element={<GameDetail />} /> 
+              <Route path="/new-games" element={<NewGames />} />
+              <Route path="/playstation-games" element={<PlayStationGames />} />
+              <Route path="/xbox-games" element={<XboxGames />} />
+              <Route path="/nintendo-games" element={<NintendoGames />} />
             </Route>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
